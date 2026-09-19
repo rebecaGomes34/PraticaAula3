@@ -1,0 +1,25 @@
+name: Build e Verificacao
+
+on: [push, pull_request]
+
+jobs:
+  build-e-teste:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixa uma copia do repositorio
+        uses: actions/checkout@v4
+
+      - name: Estagio 1 - Build
+        run: |
+          echo "Verificando se rodape.html existe..."
+          test -f rodape.html
+          echo "Build OK: arquivo encontrado."
+
+      - name: Estagio 2 - Test
+        run: |
+          echo "Procurando a palavra Suporte dentro de rodape.html..."
+          grep -q "Suporte" rodape.html
+          echo "Teste OK: suporte encontrado."
+
+          
